@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*   Contact.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,6 +9,9 @@
 /*   Updated: 2025/11/24 15:55:47 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
 #include <iostream>
 #include <string>
@@ -19,11 +22,21 @@ class Contact
         std ::string first_name;
         std ::string lats_name;
         std ::string nickname;
-        int phone[20];
+        int phone[10];
         std ::string darkest_secret;
 
     public:
-        void Add();
-        void Search();
-        void Exit();
+        void seter_fstName(std ::string fst);
+        void seter_lstName(std ::string lst);
+        void seter_nickname(std ::string nick);
+        void seter_phone(int phone[10]);
+        void seter_darkest_sec(std ::string sec);
+        std:: string geter_fst(void);
+        std:: string geter_lst(void);
+        std:: string geter_nick(void);
+        std:: string geter_sec(void);
+        int * geter_phone(void);
 };
+
+#endif
+    

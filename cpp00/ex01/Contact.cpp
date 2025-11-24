@@ -12,16 +12,39 @@
 
 #include <iostream>
 #include <string>
+#include "Contact.hpp"
 
+// seters
 
-void Add(){
-    
+void Contact :: seter_fstName(std ::string fst){
+    this->first_name = fst;
+}
+void Contact :: seter_lstName(std ::string lst ){
+    this->lats_name = lst;
+}
+void Contact :: seter_nickname(std ::string nick){
+    this->nickname = nick;
 }
 
-void Search(){
-    
+void Contact :: seter_phone(int phone[10]){
+    for (size_t i = 0; i < 10; i++)
+        this->phone[i] = phone[i];
 }
 
-void Exit(){
+void Contact :: seter_darkest_sec(std ::string sec){
+    this->darkest_secret = sec;
+}
 
+//geters
+
+std:: string Contact :: geter_fst(void){
+    return this->first_name;
+}
+
+std:: string Contact :: geter_lst(void){
+    return this->lats_name;
+}
+
+std:: string Contact ::  geter_nick(void){
+   return this->nickname;
 }

@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
+
 #include <iostream>
 #include "Contact.hpp"
 
@@ -17,13 +20,13 @@ class PhoneBook
 {
     private:
         Contact contact[8];
+        int curr;
     public: 
-        void seter_fstName(std ::string);
-        void seter_lstName(std ::string);
-        void seter_nickname(std ::string);
-        void seter_phone(int num[20]);
-        void seter_darkest_sec(std ::string);
-        void seter();
-        Contact geter(void);
+        void seter(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int num[10]);
+        void Add(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int phone[10]);
+        void Search(int index);
+        int Exit(void);
 };
+
+#endif
 
