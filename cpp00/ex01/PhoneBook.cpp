@@ -17,7 +17,7 @@
 #include <string>
 #include "PhoneBook.hpp"
 
-void print(const char *str)
+void write_cout(const char *str)
 {
     for (size_t i = 0; i < 10; i++)
     {
@@ -49,11 +49,11 @@ void PhoneBook :: Search(int index){
 
     std :: cout << index ;
     std :: cout << "|" ;
-    print(fst);
+    write_cout(fst);
     std :: cout << "|" ;
-    printf(lst);
-    std :: cout << "|" ;
-    print(nick);
+    write_cout(lst);
+    std :: cout << "|" ;rm -rf 
+    write_cout(nick);
 }   
 
 int PhoneBook :: Exit(void){

@@ -30,8 +30,10 @@ int main()
     std :: string fst, lst, nick, sec, ph;
     int phone[10] = {0};
     int cmd;
+
     while (1)
     {
+        system("clear");
         cmd = 0;
         std :: cout << "U can chose one of this Cmds\n -(1)Add to add a contact\n -(2)Search to find contact\n -(3)Exit to quit program" << std :: endl;
         std :: cin >> cmd;
@@ -62,7 +64,7 @@ int main()
                 continue;
             case 3 :
                 std :: cout << "goodBuy :)" << std :: endl;
-                break;
+                return 0;
             default:
                 std :: cerr << "Error:\nout of range" << std :: endl;
                 continue;;
