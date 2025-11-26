@@ -10,11 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CPP
-#define PHONEBOOK_CPP
-
-#include <iostream>
-#include <string>
 #include "PhoneBook.hpp"
 
 void write_cout(std :: string str)
@@ -25,21 +20,62 @@ void write_cout(std :: string str)
             std ::cout << "." << std ::endl;
         std ::cout << str[i];
     }
-    
 }
 
+int convert(std :: string str, int (&phone)[10]){
+    for (size_t i = 0; i < 10; i++)
+    {
+        if(!isdigit(str[i]))
+            return -1;
+        phone[i] = str[i] - '0';
+    }
+    return 0;
+}
 
-void PhoneBook :: Add(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int phone[10]){
-    if(fst.length() == 0 || lst.length() == 0 || nick.length() == 0 || sec.length() == 0 ){
+void PhoneBook :: Add(){
+    std :: string fst, lst, nick, sec, ph;
+    int phone[10] = {0};
+    std :: cout << "First-Name ..." << std :: endl;
+    std :: getline(std :: cin, fst);
+    std :: cout << "Last-Name ..." << std :: endl;
+    std :: getline(std :: cin, lst);
+    std :: cout << "Nick-Name ..." << std :: endl;
+    std :: getline(std :: cin, nick);
+    std :: cout << "darkest-secret ..." << std :: endl;
+    std :: getline(std :: cin, sec);
+    std :: cout << "Phone-Number ..." << std :: endl;
+    std :: getline(std :: cin, ph);
+    
+    if(fst.length() == 0 || lst.length() == 0 || nick.length() == 0 || sec.length() == 0){
         std :: cerr << "Error:\none of input is empty" << std :: endl;
+        return;
+    }
+    if(convert(ph, phone) == -1)
+    {
+        std :: cerr << "Error:\nanvalid phone number e.g.(0600000000)" << std ::  endl;
         return;
     }
     this->seter(fst, lst, nick, sec, phone);
 }
 
-void PhoneBook :: Search(int index){
+void PhoneBook :: Search()
+{
+    int index = 0;
+    std :: string input;
+    std :: cout << "chose index of contact 1-8" << std :: endl;
+    std :: getline(std :: cin , input);
+    if(!(input.length() == 1 && isdigit(input[0])))
+    {
+        std :: cerr << "Error:\nanvalid input" << std :: endl;
+        return;
+    }
     if(index > 8 || index < 1){
         std :: cerr << "Error:\nout of range" << std :: endl;
+        return;
+    }
+    if(this->curr == -1)
+    {
+        std :: cerr << "Error:\nempty book" << std :: endl;
         return;
     }
 
@@ -52,8 +88,10 @@ void PhoneBook :: Search(int index){
     write_cout(this->contact[index].geter_nick());
 }   
 
-int PhoneBook :: Exit(void){
-    return -1;
+int PhoneBook :: Exit(void)
+{
+    std :: cout << "goodBuy :)" << std :: endl;
+    return 0;
 }
 
 void PhoneBook :: seter(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int phone[10]){
@@ -68,5 +106,7 @@ void PhoneBook :: seter(std ::string fst,std:: string lst, std:: string nick, st
     this->contact[curr].seter_phone(phone);
 }
 
-
-#endif
+ PhoneBook ::PhoneBook()
+{
+    this->curr = -1;
+}

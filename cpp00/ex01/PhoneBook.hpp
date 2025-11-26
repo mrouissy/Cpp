@@ -22,9 +22,10 @@ class PhoneBook
         Contact contact[8];
         int curr;
     public: 
+        PhoneBook();
         void seter(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int num[10]);
-        void Add(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int phone[10]);
-        void Search(int index);
+        void Add();
+        void Search();
         int Exit(void);
 };
 
