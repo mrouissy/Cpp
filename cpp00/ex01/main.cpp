@@ -33,7 +33,6 @@ int main()
 
     while (1)
     {
-        system("clear");
         cmd = 0;
         std :: cout << "U can chose one of this Cmds\n -(1)Add to add a contact\n -(2)Search to find contact\n -(3)Exit to quit program" << std :: endl;
         std :: cin >> cmd;

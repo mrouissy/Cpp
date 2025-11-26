@@ -17,7 +17,7 @@
 #include <string>
 #include "PhoneBook.hpp"
 
-void write_cout(const char *str)
+void write_cout(std :: string str)
 {
     for (size_t i = 0; i < 10; i++)
     {
@@ -30,7 +30,7 @@ void write_cout(const char *str)
 
 
 void PhoneBook :: Add(std ::string fst,std:: string lst, std:: string nick, std:: string sec, int phone[10]){
-    if(fst.length() == 0 || lst.length() == 0 || nick.length() == 0 || sec.length() == 0 || sizeof(phone)/sizeof(phone[0]) == 0){
+    if(fst.length() == 0 || lst.length() == 0 || nick.length() == 0 || sec.length() == 0 ){
         std :: cerr << "Error:\none of input is empty" << std :: endl;
         return;
     }
@@ -42,18 +42,14 @@ void PhoneBook :: Search(int index){
         std :: cerr << "Error:\nout of range" << std :: endl;
         return;
     }
-    
-    const char *fst = (this->contact[index].geter_fst()).c_str();
-    const char *lst = (this->contact[index].geter_lst()).c_str();
-    const char *nick = (this->contact[index].geter_nick()).c_str();
 
     std :: cout << index ;
     std :: cout << "|" ;
-    write_cout(fst);
+    write_cout(this->contact[index].geter_fst());
     std :: cout << "|" ;
-    write_cout(lst);
-    std :: cout << "|" ;rm -rf 
-    write_cout(nick);
+    write_cout(this->contact[index].geter_lst());
+    std :: cout << "|" ;
+    write_cout(this->contact[index].geter_nick());
 }   
 
 int PhoneBook :: Exit(void){
