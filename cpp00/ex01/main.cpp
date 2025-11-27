@@ -17,13 +17,19 @@
 int main()
 {
     PhoneBook book;
+    std :: string input;
     int cmd;
 
     while (1)
     {
-        cmd = 0;
         std :: cout << "U can chose one of this Cmds\n -(1)Add to add a contact\n -(2)Search to find contact\n -(3)Exit to quit program" << std :: endl;
-        std :: cin >> cmd;
+        std :: getline(std :: cin , input);
+        if(input.size() != 1)
+        {
+            std :: cerr << "Error:\nanvalid input" << std :: endl;
+            continue;
+        }
+        cmd = input[0] - '0';
         switch (cmd)
         {
             case 1:
@@ -36,7 +42,7 @@ int main()
                 book.Exit();
                 return 0;
             default:
-                std :: cerr << "Error:\nout of range" << std :: endl;
+                std :: cerr << "Error:\nnanvalid input" << std :: endl;
                 continue;;
         }
     }
