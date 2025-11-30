@@ -22,21 +22,20 @@ class Contact
         std ::string first_name;
         std ::string lats_name;
         std ::string nickname;
-        int phone[10];
+        std ::string phone;
         std ::string darkest_secret;
 
     public:
         void seter_fstName(std ::string fst);
         void seter_lstName(std ::string lst);
         void seter_nickname(std ::string nick);
-        void seter_phone(int phone[10]);
+        void seter_phone(std ::string phone);
         void seter_darkest_sec(std ::string sec);
-        std:: string geter_fst(void);
-        std:: string geter_lst(void);
-        std:: string geter_nick(void);
-        std:: string geter_sec(void);
-        int * geter_phone(void);
+        std::string geter_fst(void);
+        std::string geter_lst(void);
+        std::string geter_nick(void);
+        std::string geter_sec(void);
+        int *geter_phone(void);
 };
 
 #endif
-    

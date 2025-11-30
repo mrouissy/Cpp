@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:55:23 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/11/24 16:03:57 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/11/30 06:54:15 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void Contact :: seter_nickname(std ::string nick){
     this->nickname = nick;
 }
 
-void Contact :: seter_phone(int phone[10]){
-    for (size_t i = 0; i < 10; i++)
-        this->phone[i] = phone[i];
+void Contact :: seter_phone(std :: string phone){
+   this->phone = phone;
 }
 
 void Contact :: seter_darkest_sec(std ::string sec){

@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:56:43 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/11/24 16:02:54 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/11/30 07:00:41 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,29 @@
 int main()
 {
     PhoneBook book;
-    std :: string input;
-    int cmd;
+    std :: string cmd;
+
 
     while (1)
     {
-        std :: cout << "U can chose one of this Cmds\n -(1)Add to add a contact\n -(2)Search to find contact\n -(3)Exit to quit program" << std :: endl;
-        std :: getline(std :: cin , input);
-        if(input.size() != 1)
+        std :: cout << "U can chose one of this Cmds\n -(ADD) to add a contact\n -(SEARCH) to find contact\n -(EXIT) to quit program" << std :: endl;
+        std :: getline(std :: cin , cmd);
+        if (cmd == "ADD")
         {
-            std :: cerr << "Error:\nanvalid input" << std :: endl;
-            continue;
+            book.Add();
         }
-        cmd = input[0] - '0';
-        switch (cmd)
+        else if (cmd == "SEARCH")
         {
-            case 1:
-                book.Add();
-                continue;;
-            case 2 :
-                book.Search();
-                continue;
-            case 3 :
-                book.Exit();
-                return 0;
-            default:
-                std :: cerr << "Error:\nnanvalid input" << std :: endl;
-                continue;;
+            book.Search();
+        }
+        else if (cmd == "EXIT")
+        {
+            book.Exit();
+            return 0;
+        }
+        else
+        {
+            std :: cerr << "Error:\ninvalid input" << std :: endl;
         }
     }
     return 0;
