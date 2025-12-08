@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:56:19 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/11/30 07:06:34 by mrouissy         ###   ########.fr       */
+/*   Updated: 2025/12/04 13:40:12 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,35 @@
 
 void write_cout(std ::string str)
 {
-    for (int i = 0; str[i] && i < 10; i++)
+    int len = str.length();
+    if (len > 10)
     {
-        if (i == 9)
-            std ::cout << ".";
-        else
-            std ::cout << str[i];
+        std ::cout << str.substr(0, 9) << ".";
+    }
+    else
+    {
+        for (int i = 0; i < 10 - len; i++)
+            std ::cout << " ";
+        std ::cout << str;
     }
 }
 
-void print_row(std::string fst, std::string lst, std::string nick, int index)
+void print_row(std::string fst, std::string lst, std::string nick, char index)
 {
-    std ::cout << index;
-    std ::cout << "|";
-    write_cout(fst);
-    std ::cout << "|";
-    write_cout(lst);
-    std ::cout << "|";
-    write_cout(nick);
-    std ::cout << "" << std ::endl;
-
+    if (index == 'q')
+        write_cout ("index");
+    else
+    {
+        for (int i = 0; i < 9; i++)
+        std ::cout << " ";
+        std::cout  << index;    
+    }
+    std::cout << "|";
+    write_cout (fst);
+    std::cout << "|";
+    write_cout (lst);
+    std::cout << "|";
+    write_cout (nick);    
 }
 
 void GetInputs(std ::string *fst, std ::string *lst, std ::string *nick, std ::string *sec, std ::string *phone)
@@ -68,10 +77,10 @@ void PhoneBook ::Search()
     int index = 0;
     std ::string input;
 
+    std :: cout << "     index|First-name| Last-name| Nick-name"<<  std :: endl;
     for (int i = 0; i <= this->curr; i++)
-        print_row(this->contact[i].geter_fst(), this->contact[i].geter_lst(), this->contact[i].geter_nick(), i + 1);
-
-    std ::cout << "chose index of contact 1-8" << std ::endl;
+        print_row(this->contact[i].geter_fst(), this->contact[i].geter_lst(), this->contact[i].geter_nick(), i + 49);//48 == '0' + 1 == index start from 1
+    std ::cout << "\nchose index of contact 1-8" << std ::endl;
     std ::getline(std ::cin, input);
 
     if (input.length() != 1 && !isdigit(input[0]))
