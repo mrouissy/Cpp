@@ -24,13 +24,8 @@ int main(int ac, char **av)
     for (int i = 1; i < ac; i++)
     {
         int len =  strlen(av[i]);
-        if(len > 0)
-        {
-            for (int j = 0; j < len ; j++)
-                std :: cout << (char)toupper(av[i][j]) ;
-        }
-        if( i < ac - 1)
-             std :: cout << " ";
+        for (int j = 0; j < len ; j++)
+            std :: cout << (char)toupper(av[i][j]) ;
     }
     return 0;
 }
