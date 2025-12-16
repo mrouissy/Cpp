@@ -7,6 +7,7 @@ test_scenarios:
     description: "Test that invalid commands produce error message"
     input_sequence:
       - "INVALID"
+      - "EXIT"
     expected_behavior: "Error: invalid input message displayed"
 
   - name: "Exit program"
@@ -24,6 +25,7 @@ test_scenarios:
       - "johnny"         # Nickname
       - "1990-01-01"     # Secret (DOB)
       - "0123456789"     # Phone number
+      - "EXIT"
     expected_behavior: "Contact added successfully to phonebook"
 
   - name: "Add multiple contacts"
@@ -41,6 +43,7 @@ test_scenarios:
       - "bob"
       - "1992-03-20"
       - "0222222222"
+      - "EXIT"
     expected_behavior: "Both contacts added to phonebook"
 
   - name: "Search for contact"
@@ -53,11 +56,14 @@ test_scenarios:
       - "1998-07-10"
       - "0333333333"
       - "SEARCH"
+      - "0"
+      - "EXIT"
     expected_behavior: "Display list of contacts in table format"
 
   - name: "Display menu"
     description: "Test that menu is displayed at startup"
-    input_sequence: []
+    input_sequence:
+      - "EXIT"
     expected_behavior: "Menu shows ADD, SEARCH, EXIT options"
 
 phonebook_constraints:
