@@ -1,0 +1,155 @@
+name: CPP Module Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-cpp00:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential python3 python3-pip
+        pip3 install pyyaml
+    
+    - name: Build ex00
+      run: |
+        cd cpp00/ex00
+        make
+    
+    - name: Test ex00 from YAML
+      run: |
+        cd cpp00/ex00
+        python3 << 'EOF'
+        import yaml
+        import subprocess
+        import sys
+        
+        with open('test_ex00.yaml', 'r') as f:
+            tests = yaml.safe_load(f)
+        
+        passed = 0
+        failed = 0
+        
+        print("Testing Megaphone (ex00)...")
+        print("-" * 50)
+        
+        for i, test in enumerate(tests['test_cases'], 1):
+            test_name = test['name']
+            command = test['command']
+            expected = test['expected_output']
+            expected_exit = test.get('exit_code', 0)
+            
+            try:
+                result = subprocess.run(
+                    command,
+                    shell=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                output = result.stdout.strip()
+                exit_code = result.returncode
+                
+                if output == expected and exit_code == expected_exit:
+                    print(f"✓ Test {i} passed: {test_name}")
+                    passed += 1
+                else:
+                    print(f"✗ Test {i} failed: {test_name}")
+                    print(f"  Expected output: '{expected}'")
+                    print(f"  Got output: '{output}'")
+                    print(f"  Expected exit code: {expected_exit}")
+                    print(f"  Got exit code: {exit_code}")
+                    failed += 1
+            except subprocess.TimeoutExpired:
+                print(f"✗ Test {i} failed: {test_name} (timeout)")
+                failed += 1
+            except Exception as e:
+                print(f"✗ Test {i} failed: {test_name} (error: {e})")
+                failed += 1
+        
+        print("-" * 50)
+        print(f"Results: {passed} passed, {failed} failed")
+        
+        if failed > 0:
+            sys.exit(1)
+        EOF
+    
+    - name: Build ex01
+      run: |
+        cd cpp00/ex01
+        make
+    
+    - name: Test ex01 from YAML
+      run: |
+        cd cpp00/ex01
+        python3 << 'EOF'
+        import yaml
+        import subprocess
+        import sys
+        
+        with open('test_ex01.yaml', 'r') as f:
+            tests = yaml.safe_load(f)
+        
+        passed = 0
+        failed = 0
+        
+        print("Testing PhoneBook (ex01)...")
+        print("-" * 50)
+        
+        for i, scenario in enumerate(tests['test_scenarios'], 1):
+            test_name = scenario['name']
+            description = scenario['description']
+            inputs = scenario['input_sequence']
+            
+            print(f"Test {i}: {test_name}")
+            print(f"  Description: {description}")
+            
+            try:
+                # Join inputs with newlines
+                input_data = '\n'.join(inputs) + '\n'
+                
+                result = subprocess.run(
+                    './phonebook',
+                    input=input_data,
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                
+                # Check if program executed successfully (exit code 0)
+                if result.returncode == 0:
+                    print(f"✓ Test {i} passed: {test_name}")
+                    passed += 1
+                else:
+                    print(f"✗ Test {i} failed: {test_name}")
+                    print(f"  Exit code: {result.returncode}")
+                    if result.stderr:
+                        print(f"  Error: {result.stderr[:200]}")
+                    failed += 1
+            except subprocess.TimeoutExpired:
+                print(f"✗ Test {i} failed: {test_name} (timeout)")
+                failed += 1
+            except Exception as e:
+                print(f"✗ Test {i} failed: {test_name} (error: {e})")
+                failed += 1
+        
+        print("-" * 50)
+        print(f"Results: {passed} passed, {failed} failed")
+        
+        if failed > 0:
+            sys.exit(1)
+        EOF
+    
+    - name: Cleanup
+      run: |
+        cd cpp00/ex00 && make fclean
+        cd ../ex01 && make fclean
