@@ -1,0 +1,67 @@
+---
+# Test cases for PhoneBook (ex01)
+# Interactive phonebook application with ADD, SEARCH, and EXIT commands
+
+test_scenarios:
+  - name: "Invalid command"
+    description: "Test that invalid commands produce error message"
+    input_sequence:
+      - "INVALID"
+    expected_behavior: "Error: invalid input message displayed"
+
+  - name: "Exit program"
+    description: "Test EXIT command terminates program"
+    input_sequence:
+      - "EXIT"
+    expected_behavior: "Program exits with code 0"
+
+  - name: "Add a contact"
+    description: "Test ADD command to add contact to phonebook"
+    input_sequence:
+      - "ADD"
+      - "John"           # First name
+      - "Doe"            # Last name
+      - "johnny"         # Nickname
+      - "1990-01-01"     # Secret (DOB)
+      - "0123456789"     # Phone number
+    expected_behavior: "Contact added successfully to phonebook"
+
+  - name: "Add multiple contacts"
+    description: "Test adding multiple contacts (up to 8)"
+    input_sequence:
+      - "ADD"
+      - "Alice"
+      - "Smith"
+      - "alice"
+      - "1995-05-15"
+      - "0111111111"
+      - "ADD"
+      - "Bob"
+      - "Johnson"
+      - "bob"
+      - "1992-03-20"
+      - "0222222222"
+    expected_behavior: "Both contacts added to phonebook"
+
+  - name: "Search for contact"
+    description: "Test SEARCH command to find a contact"
+    input_sequence:
+      - "ADD"
+      - "Charlie"
+      - "Brown"
+      - "charlie"
+      - "1998-07-10"
+      - "0333333333"
+      - "SEARCH"
+    expected_behavior: "Display list of contacts in table format"
+
+  - name: "Display menu"
+    description: "Test that menu is displayed at startup"
+    input_sequence: []
+    expected_behavior: "Menu shows ADD, SEARCH, EXIT options"
+
+phonebook_constraints:
+  - "Maximum 8 contacts"
+  - "Contact fields: first_name, last_name, nickname, secret (DOB), phone_number"
+  - "All fields are required"
+  - "PhoneBook cycles through contacts (oldest replaced by newest after 8)"
