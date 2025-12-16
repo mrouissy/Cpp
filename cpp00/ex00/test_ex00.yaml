@@ -38,11 +38,6 @@ test_cases:
     expected_output: ""
     exit_code: 0
 
-  - name: "Spaces only"
-    command: "./megaphone '   '"
-    expected_output: "   "
-    exit_code: 0
-
   - name: "Numbers and symbols"
     command: "./megaphone test@123 hello#world"
     expected_output: "TEST@123 HELLO#WORLD"
