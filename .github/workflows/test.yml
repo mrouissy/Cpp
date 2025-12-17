@@ -72,9 +72,6 @@ jobs:
             expected_output: "TEST@123 HELLO#WORLD"
             exit_code: 0
         YAML
-        fi
-        
-        YAML
         
         # Create test_ex01.yaml
         cat > cpp00/ex01/test_ex01.yaml << 'YAML'
