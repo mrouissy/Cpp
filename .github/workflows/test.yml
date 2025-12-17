@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test-cpp00:
+  test-cpp-modules:
     runs-on: ubuntu-latest
     
     steps:
@@ -17,139 +17,157 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential python3 python3-pip
-        pip3 install pyyaml
+        sudo apt-get install -y build-essential wget
+        sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+        sudo chmod +x /usr/bin/yq
     
-    - name: Build ex00
+    - name: Discover and test all exercises
       run: |
-        cd cpp00/ex00
-        make
-    
-    - name: Test ex00 from YAML
-      run: |
-        cd cpp00/ex00
-        python3 << 'EOF'
-        import yaml
-        import subprocess
-        import sys
+        #!/bin/bash
+        set -e
         
-        with open('test_ex00.yaml', 'r') as f:
-            tests = yaml.safe_load(f)
+        total_passed=0
+        total_failed=0
         
-        passed = 0
-        failed = 0
+        # Find all exercises with test YAML files
+        echo "Searching for exercises..."
+        exercises=$(find . -name "test_*.yaml" | sort)
         
-        print("Testing Megaphone (ex00)...")
-        print("-" * 50)
+        if [ -z "$exercises" ]; then
+          echo "No test files found!"
+          exit 1
+        fi
         
-        for i, test in enumerate(tests['test_cases'], 1):
-            test_name = test['name']
-            command = test['command']
-            expected = test['expected_output']
-            expected_exit = test.get('exit_code', 0)
+        echo "Found exercises to test:"
+        echo "$exercises"
+        echo "=========================================="
+        
+        for test_file in $exercises; do
+          ex_dir=$(dirname "$test_file")
+          test_name=$(basename "$test_file")
+          
+          echo ""
+          echo "=========================================="
+          echo "Testing: $ex_dir"
+          echo "Test file: $test_name"
+          echo "=========================================="
+          
+          # Check if Makefile exists
+          if [ ! -f "$ex_dir/Makefile" ]; then
+            echo "No Makefile found in $ex_dir, skipping..."
+            continue
+          fi
+          
+          # Build
+          echo "Building..."
+          cd "$ex_dir"
+          if ! make > /dev/null 2>&1; then
+            echo "✗ Build failed for $ex_dir"
+            ((total_failed++))
+            cd - > /dev/null
+            continue
+          fi
+          echo "Build successful!"
+          echo "------------------------------------------"
+          
+          # Check test type and run tests
+          if yq e '.test_cases' "$test_name" > /dev/null 2>&1; then
+            # Simple command-line tests (ex00)
+            test_count=$(yq e '.test_cases | length' "$test_name")
+            passed=0
+            failed=0
             
-            try:
-                result = subprocess.run(
-                    command,
-                    shell=True,
-                    capture_output=True,
-                    text=True,
-                    timeout=5
-                )
-                output = result.stdout.strip()
-                exit_code = result.returncode
-                
-                if output == expected and exit_code == expected_exit:
-                    print(f"✓ Test {i} passed: {test_name}")
-                    passed += 1
-                else:
-                    print(f"✗ Test {i} failed: {test_name}")
-                    print(f"  Expected output: '{expected}'")
-                    print(f"  Got output: '{output}'")
-                    print(f"  Expected exit code: {expected_exit}")
-                    print(f"  Got exit code: {exit_code}")
-                    failed += 1
-            except subprocess.TimeoutExpired:
-                print(f"✗ Test {i} failed: {test_name} (timeout)")
-                failed += 1
-            except Exception as e:
-                print(f"✗ Test {i} failed: {test_name} (error: {e})")
-                failed += 1
-        
-        print("-" * 50)
-        print(f"Results: {passed} passed, {failed} failed")
-        
-        if failed > 0:
-            sys.exit(1)
-        EOF
-    
-    - name: Build ex01
-      run: |
-        cd cpp00/ex01
-        make
-    
-    - name: Test ex01 from YAML
-      run: |
-        cd cpp00/ex01
-        python3 << 'EOF'
-        import yaml
-        import subprocess
-        import sys
-        
-        with open('test_ex01.yaml', 'r') as f:
-            tests = yaml.safe_load(f)
-        
-        passed = 0
-        failed = 0
-        
-        print("Testing PhoneBook (ex01)...")
-        print("-" * 50)
-        
-        for i, scenario in enumerate(tests['test_scenarios'], 1):
-            test_name = scenario['name']
-            description = scenario['description']
-            inputs = scenario['input_sequence']
+            for ((i=0; i<test_count; i++)); do
+              test_num=$((i+1))
+              name=$(yq e ".test_cases[$i].name" "$test_name")
+              command=$(yq e ".test_cases[$i].command" "$test_name")
+              expected=$(yq e ".test_cases[$i].expected_output" "$test_name")
+              expected_exit=$(yq e ".test_cases[$i].exit_code // 0" "$test_name")
+              
+              # Run command
+              output=$(eval "$command" 2>&1 || true)
+              exit_code=$?
+              
+              # Compare results
+              if [ "$output" = "$expected" ] && [ "$exit_code" = "$expected_exit" ]; then
+                echo "✓ Test $test_num passed: $name"
+                ((passed++))
+              else
+                echo "✗ Test $test_num failed: $name"
+                echo "  Expected: '$expected'"
+                echo "  Got: '$output'"
+                echo "  Expected exit: $expected_exit, Got: $exit_code"
+                ((failed++))
+              fi
+            done
             
-            print(f"Test {i}: {test_name}")
-            print(f"  Description: {description}")
+            echo "------------------------------------------"
+            echo "Results: $passed passed, $failed failed"
+            total_passed=$((total_passed + passed))
+            total_failed=$((total_failed + failed))
             
-            try:
-                # Join inputs with newlines
-                input_data = '\n'.join(inputs) + '\n'
-                
-                result = subprocess.run(
-                    './phonebook',
-                    input=input_data,
-                    capture_output=True,
-                    text=True,
-                    timeout=5
-                )
-                
-                # Check if program executed successfully (exit code 0)
-                if result.returncode == 0:
-                    print(f"✓ Test {i} passed: {test_name}")
-                    passed += 1
-                else:
-                    print(f"✗ Test {i} failed: {test_name}")
-                    print(f"  Exit code: {result.returncode}")
-                    if result.stderr:
-                        print(f"  Error: {result.stderr[:200]}")
-                    failed += 1
-            except subprocess.TimeoutExpired:
-                print(f"✗ Test {i} failed: {test_name} (timeout)")
-                failed += 1
-            except Exception as e:
-                print(f"✗ Test {i} failed: {test_name} (error: {e})")
-                failed += 1
+          elif yq e '.test_scenarios' "$test_name" > /dev/null 2>&1; then
+            # Interactive tests (ex01)
+            test_count=$(yq e '.test_scenarios | length' "$test_name")
+            passed=0
+            failed=0
+            
+            # Find executable
+            executable=$(find . -maxdepth 1 -type f -executable ! -name "*.sh" | head -1)
+            if [ -z "$executable" ]; then
+              echo "✗ No executable found"
+              ((total_failed++))
+              cd - > /dev/null
+              continue
+            fi
+            
+            for ((i=0; i<test_count; i++)); do
+              test_num=$((i+1))
+              name=$(yq e ".test_scenarios[$i].name" "$test_name")
+              description=$(yq e ".test_scenarios[$i].description" "$test_name")
+              
+              echo "Test $test_num: $name"
+              echo "  Description: $description"
+              
+              # Get input sequence
+              input_count=$(yq e ".test_scenarios[$i].input_sequence | length" "$test_name")
+              input_data=""
+              for ((j=0; j<input_count; j++)); do
+                line=$(yq e ".test_scenarios[$i].input_sequence[$j]" "$test_name")
+                input_data="${input_data}${line}"$'\n'
+              done
+              
+              # Run with timeout
+              if timeout 5s bash -c "echo '$input_data' | $executable" > /dev/null 2>&1; then
+                echo "✓ Test $test_num passed: $name"
+                ((passed++))
+              else
+                exit_code=$?
+                if [ $exit_code -eq 124 ]; then
+                  echo "✗ Test $test_num failed: $name (timeout)"
+                else
+                  echo "✗ Test $test_num failed: $name (exit code: $exit_code)"
+                fi
+                ((failed++))
+              fi
+            done
+            
+            echo "------------------------------------------"
+            echo "Results: $passed passed, $failed failed"
+            total_passed=$((total_passed + passed))
+            total_failed=$((total_failed + failed))
+          fi
+          
+          # Cleanup
+          make fclean > /dev/null 2>&1 || true
+          cd - > /dev/null
+        done
         
-        print("-" * 50)
-        print(f"Results: {passed} passed, {failed} failed")
+        echo ""
+        echo "=========================================="
+        echo "OVERALL RESULTS: $total_passed passed, $total_failed failed"
+        echo "=========================================="
         
-        if failed > 0:
-            sys.exit(1)
-        EOF
-    
-    - name: Cleanup
-      run: |
-        cd cpp00/ex00 && make fclean
-        cd ../ex01 && make fclean
+        if [ $total_failed -gt 0 ]; then
+          exit 1
+        fi
