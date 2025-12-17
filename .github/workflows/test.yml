@@ -21,11 +21,10 @@ jobs:
         sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
         sudo chmod +x /usr/bin/yq
     
-    - name: Create test files if missing
+    - name: Create test files
       run: |
-        # Create test_ex00.yaml if it doesn't exist
-        if [ ! -f "cpp00/ex00/test_ex00.yaml" ]; then
-          cat > cpp00/ex00/test_ex00.yaml << 'YAML'
+        # Create test_ex00.yaml
+        cat > cpp00/ex00/test_ex00.yaml << 'YAML'
         ---
         test_cases:
           - name: "No arguments - should output default message"
@@ -75,9 +74,10 @@ jobs:
         YAML
         fi
         
-        # Create test_ex01.yaml if it doesn't exist
-        if [ ! -f "cpp00/ex01/test_ex01.yaml" ]; then
-          cat > cpp00/ex01/test_ex01.yaml << 'YAML'
+        YAML
+        
+        # Create test_ex01.yaml
+        cat > cpp00/ex01/test_ex01.yaml << 'YAML'
         ---
         test_scenarios:
           - name: "Invalid command"
@@ -137,10 +137,6 @@ jobs:
             input_sequence:
               - "EXIT"
         YAML
-          echo "✓ Test files created"
-        else
-          echo "✓ Test files already exist"
-        fi
     
     - name: Discover and test all exercises
       shell: bash {0}
@@ -233,6 +229,7 @@ jobs:
             
             if [ -z "$executable" ]; then
               echo "✗ No executable found"
+              ls -la . | grep -E '^-'
               ((total_failed++))
               cd - > /dev/null
               continue
