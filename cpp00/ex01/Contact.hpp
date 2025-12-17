@@ -19,11 +19,11 @@
 class Contact
 {
     private:
-        std ::string first_name;
-        std ::string lats_name;
-        std ::string nickname;
-        std ::string phone;
-        std ::string darkest_secret;
+        std ::string _first_name;
+        std ::string _lats_name;
+        std ::string _nickname;
+        std ::string _phone;
+        std ::string _darkest_secret;
 
     public:
         void seter_fstName(std ::string fst);
@@ -31,11 +31,11 @@ class Contact
         void seter_nickname(std ::string nick);
         void seter_phone(std ::string phone);
         void seter_darkest_sec(std ::string sec);
-        std::string geter_fst(void);
-        std::string geter_lst(void);
-        std::string geter_nick(void);
-        std::string geter_sec(void);
-        int *geter_phone(void);
+        std::string geter_fst(void) const;
+        std::string geter_lst(void) const;
+        std::string geter_nick(void) const;
+        std::string geter_sec(void) const;
+        std::string geter_phone(void) const;
 };
 
 #endif

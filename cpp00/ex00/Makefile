@@ -7,17 +7,22 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	@echo "building Done"
+
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "cleanning Done"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+
 
 re: fclean all
+
 
 .PHONY: all clean fclean re

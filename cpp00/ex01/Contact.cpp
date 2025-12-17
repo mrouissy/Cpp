@@ -17,33 +17,41 @@
 // seters
 
 void Contact :: seter_fstName(std ::string fst){
-    this->first_name = fst;
+    this->_first_name = fst;
 }
 void Contact :: seter_lstName(std ::string lst ){
-    this->lats_name = lst;
+    this->_lats_name = lst;
 }
 void Contact :: seter_nickname(std ::string nick){
-    this->nickname = nick;
+    this->_nickname = nick;
 }
 
 void Contact :: seter_phone(std :: string phone){
-   this->phone = phone;
+   this->_phone = phone;
 }
 
 void Contact :: seter_darkest_sec(std ::string sec){
-    this->darkest_secret = sec;
+    this->_darkest_secret = sec;
 }
 
 //geters
 
-std:: string Contact :: geter_fst(void){
-    return this->first_name;
+std:: string Contact :: geter_fst(void) const{
+    return this->_first_name;
 }
 
-std:: string Contact :: geter_lst(void){
-    return this->lats_name;
+std:: string Contact :: geter_lst(void) const{
+    return this->_lats_name;
 }
 
-std:: string Contact ::  geter_nick(void){
-   return this->nickname;
+std:: string Contact ::  geter_nick(void) const{
+   return this->_nickname;
+}
+
+std:: string Contact :: geter_sec(void) const{
+    return this->_darkest_secret;
+}
+
+std:: string Contact ::geter_phone(void) const{
+    return this->_phone;
 }

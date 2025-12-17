@@ -19,8 +19,9 @@
 class PhoneBook
 {
     private:
-        Contact contact[8];
-        int curr;
+        Contact _contact[8];
+        int _curr;
+        int _size;
     public: 
         PhoneBook();
         void seter(std ::string fst,std:: string lst, std:: string nick, std:: string sec, std :: string phone);

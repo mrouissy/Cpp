@@ -49,15 +49,20 @@ void GetInputs(std ::string *fst, std ::string *lst, std ::string *nick, std ::s
 {
 
     std ::cout << "First-Name ..." << std ::endl;
-    std ::getline(std ::cin, *fst);
+    if(!std ::getline(std ::cin, *fst))
+        return;
     std ::cout << "Last-Name ..." << std ::endl;
-    std ::getline(std ::cin, *lst);
+    if(!std ::getline(std ::cin, *lst))
+        return;
     std ::cout << "Nick-Name ..." << std ::endl;
-    std ::getline(std ::cin, *nick);
+    if(!std ::getline(std ::cin, *nick))
+        return;
     std ::cout << "darkest-secret ..." << std ::endl;
-    std ::getline(std ::cin, *sec);
+    if(!std ::getline(std ::cin, *sec))
+        return;
     std ::cout << "Phone-Number ..." << std ::endl;
-    std ::getline(std ::cin, *phone);
+    if(!std ::getline(std ::cin, *phone))
+        return;
 }
 
 void PhoneBook ::Add()
@@ -78,8 +83,8 @@ void PhoneBook ::Search()
     std ::string input;
 
     std :: cout << "     index|First-name| Last-name| Nick-name"<<  std :: endl;
-    for (int i = 0; i <= this->curr; i++)
-        print_row(this->contact[i].geter_fst(), this->contact[i].geter_lst(), this->contact[i].geter_nick(), i + 49);//48 == '0' + 1 == index start from 1
+    for (int i = 0; i < this->_size; i++)
+        print_row(this->_contact[i].geter_fst(), this->_contact[i].geter_lst(), this->_contact[i].geter_nick(), i + 49);//48 == '0' + 1 == index start from 1
     std ::cout << "\nchose index of contact 1-8" << std ::endl;
     std ::getline(std ::cin, input);
 
@@ -90,24 +95,25 @@ void PhoneBook ::Search()
     }
 
     index = input[0] - '0';
-    if (index > 8 || index < 1)
+    if (index > 8 || index < 1 || index > this->_size )
     {
         std ::cerr << "Error:\nout of range" << std ::endl;
         return;
     }
 
-    if (this->curr == -1)
+    if (this->_curr == -1)
     {
         std ::cerr << "Error:\nempty book" << std ::endl;
         return;
     }
+    
     index--;
-    std ::cout << "First name :" << this->contact[index].geter_fst() << std ::endl;
-    std ::cout << "Last name :" << this->contact[index].geter_fst() << std ::endl;
-    std ::cout << "Nick name :" << this->contact[index].geter_fst() << std ::endl;
-    std ::cout << "Darkest secret :" << this->contact[index].geter_fst() << std ::endl;
-    std ::cout << "First name :" << this->contact[index].geter_fst() << std ::endl;
-    std ::cout << "First name :" << this->contact[index].geter_fst() << std ::endl;
+    
+    std ::cout << "First name :" << this->_contact[index].geter_fst() <<
+    "\nLast name :" << this->_contact[index].geter_fst() <<
+    "\nNick name :" << this->_contact[index].geter_fst() <<
+    "\nDarkest secret :" << this->_contact[index].geter_fst() <<
+    "\nPhone number :" << this->_contact[index].geter_phone() << std ::endl;
 }
 
 int PhoneBook ::Exit(void)
@@ -119,17 +125,20 @@ int PhoneBook ::Exit(void)
 void PhoneBook ::seter(std ::string fst, std::string lst, std::string nick, std::string sec, std ::string phone)
 {
 
-    this->curr++;
-    if (curr > 7)
-        curr = 0;
-    this->contact[curr].seter_fstName(fst);
-    this->contact[curr].seter_lstName(lst);
-    this->contact[curr].seter_nickname(nick);
-    this->contact[curr].seter_darkest_sec(sec);
-    this->contact[curr].seter_phone(phone);
+    this->_curr++;
+    if(this->_size < 8)
+        this->_size++;
+    if (this->_curr == 8)
+        this->_curr = 0;
+    this->_contact[this->_curr].seter_fstName(fst);
+    this->_contact[this->_curr].seter_lstName(lst);
+    this->_contact[this->_curr].seter_nickname(nick);
+    this->_contact[this->_curr].seter_darkest_sec(sec);
+    this->_contact[this->_curr].seter_phone(phone);
 }
 
 PhoneBook ::PhoneBook()
 {
-    this->curr = -1;
+    this->_curr = -1;
+    this->_size = 0;
 }
