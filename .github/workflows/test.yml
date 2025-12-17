@@ -168,6 +168,7 @@ jobs:
           
           # Build
           cd "$ex_dir"
+          make fclean > /dev/null 2>&1 || true
           if ! make > /dev/null 2>&1; then
             echo "✗ Build failed"
             ((total_failed++))
