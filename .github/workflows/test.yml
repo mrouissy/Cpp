@@ -31,7 +31,7 @@ jobs:
           - name: "No arguments - should output default message"
             command: "./megaphone"
             expected_output: "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
-            exit_code: 1
+            exit_code: 0
 
           - name: "Single lowercase string"
             command: "./megaphone hello"
@@ -137,6 +137,9 @@ jobs:
             input_sequence:
               - "EXIT"
         YAML
+          echo "✓ Test files created"
+        else
+          echo "✓ Test files already exist"
         fi
     
     - name: Discover and test all exercises
