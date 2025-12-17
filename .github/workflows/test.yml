@@ -183,7 +183,7 @@ jobs:
           fi
           
           # Check test type and run tests
-          if yq e '.test_cases' "$test_name" > /dev/null 2>&1; then
+          if yq e '.test_cases' "$test_name" &>/dev/null; then
             # Simple command-line tests (ex00)
             test_count=$(yq e '.test_cases | length' "$test_name")
             passed=0
@@ -218,14 +218,19 @@ jobs:
             total_passed=$((total_passed + passed))
             total_failed=$((total_failed + failed))
             
-          elif yq e '.test_scenarios' "$test_name" > /dev/null 2>&1; then
+          elif yq e '.test_scenarios' "$test_name" &>/dev/null; then
             # Interactive tests (ex01)
             test_count=$(yq e '.test_scenarios | length' "$test_name")
             passed=0
             failed=0
             
-            # Find executable
-            executable=$(find . -maxdepth 1 -type f -executable ! -name "*.sh" | head -1)
+            # Find executable (look for phonebook specifically or any executable)
+            if [ -x "./phonebook" ]; then
+              executable="./phonebook"
+            else
+              executable=$(find . -maxdepth 1 -type f -executable ! -name "*.sh" 2>/dev/null | head -1)
+            fi
+            
             if [ -z "$executable" ]; then
               echo "✗ No executable found"
               ((total_failed++))

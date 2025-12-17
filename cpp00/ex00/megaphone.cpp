@@ -26,6 +26,8 @@ int main(int ac, char **av)
         int len =  strlen(av[i]);
         for (int j = 0; j < len ; j++)
             std :: cout << (char)toupper(av[i][j]) ;
+        if (i < ac - 1)
+            std :: cout << " ";
     }
     return 0;
 }
