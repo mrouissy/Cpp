@@ -1,7 +1,7 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = megaphone
-SRC = megaphone.cpp
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+NAME = harl
+SRC = $(wildcard *.cpp)
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
@@ -20,7 +20,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-
 
 re: fclean all
 
