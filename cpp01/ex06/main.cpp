@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/31 18:37:29 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/02 16:03:51 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/01/02 12:40:00 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/01/02 15:50:29 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Zombie.hpp"
+#include "Harl.hpp"
 
-Zombie* zombieHorde(int N, std::string name )
+int main(int argc, char **argv)
 {
-  Zombie *zo = new Zombie[N];
-  for (int i = 0; i < N; i++)
-    zo[i].seter(name);
-  return zo;
+    if (argc != 2)
+    {
+        std::cerr << "Usage: ./harlFilter <level>" << std::endl;
+        return 1;
+    }
+    
+    Harl harl;
+    harl.filter(argv[1]);
+    
+    return 0;
 }

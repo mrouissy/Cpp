@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   replace.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/31 18:37:29 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/02 16:03:51 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/01/02 14:40:40 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/01/02 14:40:40 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Zombie.hpp"
+#include "replace.hpp"
 
-Zombie* zombieHorde(int N, std::string name )
+void replace(std::string &buffer, const std::string &s1, const std::string &s2)
 {
-  Zombie *zo = new Zombie[N];
-  for (int i = 0; i < N; i++)
-    zo[i].seter(name);
-  return zo;
+    size_t start = 0;
+    while ((start = buffer.find(s1, start)) != std::string::npos)
+    {
+        buffer.erase(start, s1.length());
+        buffer.insert(start, s2);
+        start += s2.length();
+    }
 }

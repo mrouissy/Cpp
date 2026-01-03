@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 17:58:02 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/12/31 19:51:20 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/01/02 16:00:38 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int main()
 {
    Zombie *zo = zombieHorde(5, "kahlid");
-   delete[](zo);
+   for (int i = 0; i < 5; i++)
+        zo[i].announce();
+   delete[] zo;
     return 0;
 }

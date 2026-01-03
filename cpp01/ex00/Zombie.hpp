@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 17:20:46 by mrouissy          #+#    #+#             */
-/*   Updated: 2025/12/31 18:00:54 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/01/02 14:44:50 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ class Zombie
 {
     private:
         std::string _name;
-
     public:
         Zombie(std::string name);
         ~Zombie(void);
