@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:09:36 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/03 11:37:50 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:33:34 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Fixed
         static const int _fractionalBits = 8;
 
     public:
-        Fixed();
+        Fixed(void);
         Fixed(const Fixed &other);
         Fixed &operator=(const Fixed &other);
         ~Fixed();

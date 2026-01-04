@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:44:22 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/04 13:35:31 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:37:56 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,25 @@ void Fixed::setRawBits(const int raw)
 
 Fixed::Fixed(const int raw)
 {
-   this->_fixedPointValue =raw * pow(2,_fractionalBits);
+   this->_fixedPointValue =raw << _fractionalBits;
     std::cout << "Int constructor called"<< std::endl;
 }
 
 Fixed::Fixed(const float raw)
 {
-    this->_fixedPointValue = roundf(raw * pow(2,_fractionalBits));
+    this->_fixedPointValue = roundf(raw * (1 << _fractionalBits));
     std::cout << "Float constructor calle"<< std::endl;
 }
 
 int Fixed::toInt(void)const
 {
-    return _fixedPointValue / pow(2,_fractionalBits);
+    return _fixedPointValue >> _fractionalBits;
 }
 
 float Fixed::toFloat(void)const
 {
-    return _fixedPointValue / pow(2,_fractionalBits);
+    float tmp = 1 << _fractionalBits;
+    return _fixedPointValue / tmp;
 }
 
 std::ostream& operator<<(std::ostream &std,const Fixed &other)
