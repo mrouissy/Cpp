@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 22:51:10 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/05 00:13:59 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/01/05 00:39:09 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void ClapTrap::takeDamage(unsigned int amount)
     if(_hp <= 0)
         return std::cout << "ClapTrap "<< _name <<" is already dead"<< std::endl, (void)0;
     _hp-=amount;
+    if(_hp <= 0)
+        return std::cout << "ClapTrap "<< _name <<" is dead"<< std::endl, (void)0;
     std::cout << "ClapTrap " << _name << " received " << amount <<" points of damage! ( stats " << _hp << " HP, " << _ep << " EP, " << _dmg << " DMG)" << std::endl;
 }
 void ClapTrap::beRepaired(unsigned int amount)
