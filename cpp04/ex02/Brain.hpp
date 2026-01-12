@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 17:20:00 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/12 17:41:30 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/01/12 13:44:48 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/01/12 16:58:27 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef BRAIN_HPP
+#define BRAIN_HPP
 
 #include <iostream>
-#include <string>
 
-class Animal
+class Brain
 {
-    protected:
-        std::string type;
-    public:
-        Animal();
-        Animal(std::string type);
-        Animal(const Animal& other);
-        Animal& operator=(const Animal& other);
-        virtual ~Animal();
-        std::string getType(void) const;
+        std::string _ideas[100];
+    public :
+        Brain();
+        ~Brain();
+        Brain(const Brain& other);
+        Brain& operator=(const Brain& other);
+        std::string* geter(void)const;
+        void seter(std::string ideas[100]);
 };
 
 #endif

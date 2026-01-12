@@ -1,28 +1,25 @@
+NAME = animal
+
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = scav
-SRC = $(wildcard *.cpp)
-OBJ = $(SRC:.cpp=.o)
+
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
-	@echo "building Done"
-
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
-	@echo "cleanning Done"
+	rm -f $(OBJS)
 
 fclean: clean
-	@rm -f $(NAME)
-
+	rm -f $(NAME)
 
 re: fclean all
-
 
 .PHONY: all clean fclean re

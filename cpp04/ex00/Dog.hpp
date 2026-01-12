@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/11 13:32:44 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/11 14:26:35 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/01/12 17:20:00 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/01/12 17:33:12 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 
 class Dog : public Animal
 {
-    public :
+    public:
         Dog();
         Dog(const Dog& other);
         Dog& operator=(const Dog& other);
-        virtual ~Dog();  
-        void makeSound(void) const;
-
+        virtual ~Dog();
+        virtual void makeSound(void) const;
 };
 
 #endif

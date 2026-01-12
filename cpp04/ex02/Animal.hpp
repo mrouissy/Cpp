@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 17:20:00 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/12 17:41:30 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/01/11 13:06:41 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/01/12 17:50:19 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 #define ANIMAL_HPP
 
 #include <iostream>
-#include <string>
 
 class Animal
 {
     protected:
-        std::string type;
+        std::string _type;
     public:
         Animal();
         Animal(std::string type);
-        Animal(const Animal& other);
         Animal& operator=(const Animal& other);
+        Animal(const Animal& other);
         virtual ~Animal();
         std::string getType(void) const;
+        virtual void makeSound(void) const = 0;  // Pure virtual - Animal is now abstract
+        virtual void setBrain(std::string ideas[100]);
+        virtual std::string* getBrain(void) const;
 };
 
 #endif

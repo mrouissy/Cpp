@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/11 13:21:45 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/01/11 14:25:25 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/01/12 17:20:00 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/01/12 17:33:11 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 #include "Animal.hpp"
 
-class Cat : virtual public Animal
+class Cat : public Animal
 {
-    public :
+    public:
         Cat();
         Cat(const Cat& other);
         Cat& operator=(const Cat& other);
-        ~Cat();
-        void makeSound(void) const; 
+        virtual ~Cat();
+        virtual void makeSound(void) const;
 };
 
 #endif
