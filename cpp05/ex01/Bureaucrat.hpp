@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:44 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/03/29 22:51:32 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/03/29 23:43:42 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 #include <iostream>
 #include <string>
 
+class Form;
+
 class Bureaucrat
 {
     private:
         const std::string _name;
         int _grade;
-
+        
         void checkGrade(int grade) const;
+
 
     public:
         Bureaucrat();
@@ -37,6 +40,10 @@ class Bureaucrat
 
         void incrementGrade();
         void decrementGrade();
+
+        //new
+        void signForm(Form &form);        
+
         
         class GradeTooHighException : public std::exception
         {
