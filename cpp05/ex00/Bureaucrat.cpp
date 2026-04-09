@@ -6,11 +6,24 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:38 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/03/29 22:28:31 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 14:32:18 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
+class Bureaucrat::GradeTooHighException : public std::exception
+{
+    public:
+        virtual const char *what() const throw();
+};
+
+class Bureaucrat::GradeTooLowException : public std::exception
+{
+    public:
+        virtual const char *what() const throw();
+};
+
 
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 {
@@ -36,7 +49,7 @@ Bureaucrat::~Bureaucrat()
 {
 }
 
-const std::string &Bureaucrat::getName() const
+const std::string Bureaucrat::getName() const
 {
     return _name;
 }
