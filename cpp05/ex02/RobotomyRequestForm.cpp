@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:50:29 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 16:40:55 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 18:40:52 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ const char *RobotomyRequestForm::check_exec::what() const throw()
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor)
 {
-    if (executor.getGrade()> 137)
+    if (executor.getGrade() > EXEC_ROBOT || !get_state())
     {
         throw check_exec();
     }
     else
     {
-        this->beSigned(executor);
         std::cout << "Brrrrzzzz..." << std::endl;
-        if(rand() % 2  == 0)
-            std::cout << ""<< "has been robotomized successfully.";
-            
+        if (std::rand() % 2 == 0)
+            std::cout << _target << " has been robotomized successfully." << std::endl;
+        else
+            std::cout << "Robotomy failed on " << _target << "." << std::endl;
     }
 }

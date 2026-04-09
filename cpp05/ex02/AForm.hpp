@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 21:57:08 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 14:16:17 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 18:38:47 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #define AFORM_HPP
 
 #include "Bureaucrat.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <ctime>
+
+#define EXEC_STRA 137
+#define EXEC_ROBOT 45
+#define EXEC_PAR 5
 
 
 class AForm

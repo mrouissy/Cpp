@@ -6,19 +6,21 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 21:57:11 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 14:05:38 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 18:12:23 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm() : _is_signed(false), _name("Default"),  _r_grade(150), _r_execute(0)
+AForm::AForm() : _is_signed(false), _name("Default"),  _r_grade(150), _r_execute(150)
 {  
 }
 
 AForm::AForm(bool is_signed, const std::string name, const int r_grade, const int r_execute) : _is_signed(is_signed), _name(name),  _r_grade(r_grade), _r_execute(r_execute)
 {
-    checkGrade(r_grade);    
+    checkGrade(r_grade);   
+    checkGrade(r_execute);    
+
 }
 
 AForm &AForm::operator=(const AForm &other)

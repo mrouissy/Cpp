@@ -6,27 +6,24 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 13:51:37 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 16:19:37 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 18:34:21 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
-
-#include <fstream>
-#include <iostream>
 #include "AForm.hpp"
-#define EXEC 137
 
 
 class ShrubberyCreationForm : public AForm
 {
     private:
         std::string _target;
+        void createShrubberyFile() const;
     public:
         ShrubberyCreationForm();
-        ShrubberyCreationForm(bool is_signed, std::string name, const int r_grade, const int r_execute);
+        ShrubberyCreationForm(bool is_signed, std::string name, const int r_grade, const int r_execute, const std::string target = "default");
         ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
         ~ShrubberyCreationForm();
         void execute(Bureaucrat const & executor);
