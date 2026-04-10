@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:10:39 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 15:24:51 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/10 21:02:14 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-
+#define FORMS 3
 
 class Intern
 {

@@ -1,0 +1,24 @@
+# C++ build artifacts
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+a.out
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build directories
+build/
+cmake-build-*/
+
+# Exercise-generated files
+*_shrubbery

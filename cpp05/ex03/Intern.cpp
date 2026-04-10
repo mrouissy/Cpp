@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:10:39 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 15:26:41 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/10 21:17:58 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,25 @@ Intern &Intern::operator=(const Intern &other)
 }
 Intern::~Intern()
 {
-    
+ 
+}
+
+const char *Intern::FormNotFound::what() const throw()
+{
+    return "Form not found";
 }
 AForm* Intern::makeFrom(std::string f_name, std::string f_target)
 {
+    AForm* (Intern::*types[FORMS])(std::string) = {&Intern::makeShrubbery, &Intern::makePresidential, &Intern::makeRobotomy};
+    std::string formName[3] = {"shruberry", "robotomy" , "pardon"};
+    for (int i = 0; i < FORMS; i++)
+    {
+        if(f_name == formName[i])
+        {
+            std::cout << "Intern creates " << f_name << std::endl;
+            return (this->*types[i])(f_target);
+        }
+    }
+    throw FormNotFound();
     
 }
