@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:38 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 22:54:34 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 19:47:15 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,6 @@ void Bureaucrat::executeForm(AForm &form) const
     {
         std::cerr << this->getName() << " couldn’t execute " <<form.get_name() << " because " << e.what() <<std::endl;
     }
+    
+    
 }

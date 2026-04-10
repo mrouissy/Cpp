@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:44 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 22:46:32 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:46:13 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Bureaucrat
     private:
         const std::string _name;
         int _grade;
+        
         void checkGrade(int grade) const;
 
 

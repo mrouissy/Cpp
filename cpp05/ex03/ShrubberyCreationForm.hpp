@@ -1,0 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/09 13:51:37 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/04/10 15:21:08 by mrouissy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
+
+#include "AForm.hpp"
+
+
+class ShrubberyCreationForm : public AForm
+{
+    private:
+        std::string _target;
+        void createShrubberyFile() const;
+    public:
+        ShrubberyCreationForm();
+        ShrubberyCreationForm(const std::string target = "default");
+        ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
+        ~ShrubberyCreationForm();
+        void execute(Bureaucrat const & executor);
+        class check_exec;
+        class check_open;
+        
+};
+
+#endif
