@@ -48,7 +48,7 @@ const char *Intern::FormNotFound::what() const throw()
 AForm* Intern::makeFrom(std::string f_name, std::string f_target)
 {
     AForm* (Intern::*types[FORMS])(std::string) = {&Intern::makeShrubbery, &Intern::makePresidential, &Intern::makeRobotomy};
-    std::string formName[3] = {"shruberry", "robotomy" , "pardon"};
+    std::string formName[3] = {"shrubbery", "robotomy" , "pardon"};
     for (int i = 0; i < FORMS; i++)
     {
         if(f_name == formName[i])

@@ -21,7 +21,7 @@ int main()
     try
     {
         Intern st;
-        st.makeFrom("shruberry", "home");
+        st.makeFrom("shrubbery", "home");
     }
     catch (std::exception &e)
     {
