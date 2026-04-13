@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:44 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 22:46:32 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:09:49 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ class Bureaucrat
 
         const std::string getName() const;
         int getGrade() const;
-
         void incrementGrade();
         void decrementGrade();
 

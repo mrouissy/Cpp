@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:44 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/03/29 23:43:42 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:34:10 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ class Bureaucrat
         //new
         void signForm(Form &form);        
 
-        
         class GradeTooHighException : public std::exception
         {
             public:

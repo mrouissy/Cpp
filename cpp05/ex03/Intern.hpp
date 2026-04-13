@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:10:39 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 21:02:14 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Intern
         
     public:
         Intern();
+        Intern(const Intern &other);
         Intern &operator=(const Intern &other);     
         ~Intern();
         class FormNotFound : public std::exception{

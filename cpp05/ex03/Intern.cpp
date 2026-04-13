@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:10:39 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 21:17:58 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ AForm* Intern::makePresidential(std::string target)
     return new PresidentialPardonForm(target);
 }
 Intern::Intern(){}
+
+Intern::Intern(const Intern &other)
+{
+    (void)other;
+}
 
 Intern &Intern::operator=(const Intern &other)
 {

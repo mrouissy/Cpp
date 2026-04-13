@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 21:57:08 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/03/29 23:57:44 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:41:24 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class Form
     public:
         Form();
         Form(bool is_signed, std::string name, const int r_grade, const int r_execute);
+        Form (const Form &other);
         Form &operator=(const Form &other);
         ~Form();
 
@@ -36,12 +37,12 @@ class Form
         int get_r_grade() const;
         int get_r_execute() const;
         void beSigned(Bureaucrat bureaucrat);
+        
         class GradeTooHighException : public std::exception
         {
             public:
                 virtual const char *what() const throw();
         };
-
         class GradeTooLowException : public std::exception
         {
             public:

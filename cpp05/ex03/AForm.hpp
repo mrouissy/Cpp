@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 21:57:08 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 18:38:47 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class AForm
         
     public:
         AForm();
+        AForm(const AForm &other);
         AForm(bool is_signed, std::string name, const int r_grade, const int r_execute);
         AForm &operator=(const AForm &other);
         ~AForm();

@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 13:51:37 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 20:51:07 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {}
 
-class ShrubberyCreationForm::check_exec : public std::exception
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+    : AForm(other), _target(other._target)
 {
-    public:
-        virtual const char *what() const throw();
-};
+}
+
 
 
 const char *ShrubberyCreationForm::check_exec::what() const throw()
@@ -43,11 +43,7 @@ const char *ShrubberyCreationForm::check_exec::what() const throw()
     return "Error in requirements";
 }
 
-class ShrubberyCreationForm::check_open : public std::exception
-{
-    public:
-        virtual const char *what() const throw();
-};
+
 
 
 const char *ShrubberyCreationForm::check_open::what() const throw()

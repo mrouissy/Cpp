@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 13:51:37 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 15:21:08 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class ShrubberyCreationForm : public AForm
     public:
         ShrubberyCreationForm();
         ShrubberyCreationForm(const std::string target = "default");
+        ShrubberyCreationForm(const ShrubberyCreationForm &other);
         ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
         ~ShrubberyCreationForm();
         void execute(Bureaucrat const & executor);

@@ -6,24 +6,20 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:38 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/03/30 14:12:40 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:35:12 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
-{
-}
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150){}
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade){}
+Bureaucrat::~Bureaucrat(){}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade)
 {
     checkGrade(_grade);
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade)
-{
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
@@ -33,9 +29,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
     return *this;
 }
 
-Bureaucrat::~Bureaucrat()
-{
-}
 
 const std::string Bureaucrat::getName() const
 {

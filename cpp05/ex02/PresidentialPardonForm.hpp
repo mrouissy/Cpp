@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:24:35 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 18:34:48 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:55:36 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ class PresidentialPardonForm : public AForm
         PresidentialPardonForm();
         PresidentialPardonForm(bool is_signed, std::string name, const int r_grade, const int r_execute, const std::string target);
         PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
+        PresidentialPardonForm (const PresidentialPardonForm &other);
         ~PresidentialPardonForm();
         void execute(Bureaucrat const & executor);
-        class check_exec;
+        
+        class check_exec : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
 };
 
 #endif

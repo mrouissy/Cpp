@@ -6,13 +6,13 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:24:35 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 18:46:35 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-
+PresidentialPardonForm::~PresidentialPardonForm(){}
 
 PresidentialPardonForm::PresidentialPardonForm():AForm()
 {
@@ -24,18 +24,19 @@ PresidentialPardonForm::PresidentialPardonForm(bool is_signed, std::string name,
 }
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
 {
-    AForm::operator=(other);
+    if (this != &other)
+    {
+        AForm::operator=(other);
+        _target = other._target;
+    }
     return *this;
 }
-PresidentialPardonForm::~PresidentialPardonForm()
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
+    : AForm(other), _target(other._target)
 {
 }
 
-class PresidentialPardonForm::check_exec : public std::exception
-{
-    public:
-        virtual const char *what() const throw();
-};
 
 const char *PresidentialPardonForm::check_exec::what() const throw()
 {

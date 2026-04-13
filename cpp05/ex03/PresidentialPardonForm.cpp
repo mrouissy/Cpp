@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:24:35 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 15:23:11 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:10:46 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,19 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string target) : AForm
 {
     _target  = target;
 }
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
+    : AForm(other), _target(other._target)
+{
+}
+
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
 {
-    AForm::operator=(other);
+    if (this != &other)
+    {
+        AForm::operator=(other);
+        _target = other._target;
+    }
     return *this;
 }
 PresidentialPardonForm::~PresidentialPardonForm()
@@ -41,7 +51,6 @@ const char *PresidentialPardonForm::check_exec::what() const throw()
 {
     return "Error in requirements";
 }
-
 
 void PresidentialPardonForm::execute(Bureaucrat const &executor)
 {

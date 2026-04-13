@@ -6,21 +6,20 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 21:57:11 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 18:12:23 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:50:51 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm() : _is_signed(false), _name("Default"),  _r_grade(150), _r_execute(150)
-{  
-}
+AForm::AForm() : _is_signed(false), _name("Default"),  _r_grade(150), _r_execute(150){}
+AForm::AForm(const AForm &other): _is_signed(other._is_signed), _name(other._name), _r_grade(other._r_grade), _r_execute(other._r_execute){}
+AForm::~AForm(){}
 
 AForm::AForm(bool is_signed, const std::string name, const int r_grade, const int r_execute) : _is_signed(is_signed), _name(name),  _r_grade(r_grade), _r_execute(r_execute)
 {
     checkGrade(r_grade);   
     checkGrade(r_execute);    
-
 }
 
 AForm &AForm::operator=(const AForm &other)
@@ -28,12 +27,7 @@ AForm &AForm::operator=(const AForm &other)
     if (this != &other)
         _is_signed = other._is_signed;
     return *this;
-}
- 
-AForm::~AForm()
-{
-    
-}
+} 
 
 void AForm::checkGrade(int grade) const
 {
@@ -43,7 +37,6 @@ void AForm::checkGrade(int grade) const
         throw GradeTooLowException();
 }
 
-
 bool AForm::get_state() const
 {
     return this->_is_signed;
@@ -52,10 +45,12 @@ const std::string AForm::get_name() const
 {
     return this->_name;
 }
+
 int AForm::get_r_grade() const
 {
     return this->_r_grade;
 }
+
 int AForm::get_r_execute() const
 {
     return this->_r_execute;

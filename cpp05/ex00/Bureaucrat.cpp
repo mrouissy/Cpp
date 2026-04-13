@@ -6,36 +6,19 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:38 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 14:32:18 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:30:52 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-class Bureaucrat::GradeTooHighException : public std::exception
-{
-    public:
-        virtual const char *what() const throw();
-};
-
-class Bureaucrat::GradeTooLowException : public std::exception
-{
-    public:
-        virtual const char *what() const throw();
-};
-
-
-Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
-{
-}
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150){}
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade){}
+Bureaucrat::~Bureaucrat(){}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade(grade)
 {
     checkGrade(_grade);
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade)
-{
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
@@ -43,10 +26,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
     if (this != &other)
         _grade = other._grade;
     return *this;
-}
-
-Bureaucrat::~Bureaucrat()
-{
 }
 
 const std::string Bureaucrat::getName() const

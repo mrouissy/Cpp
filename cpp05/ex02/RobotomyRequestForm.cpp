@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:50:29 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/09 18:40:52 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:06:32 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ RobotomyRequestForm::RobotomyRequestForm(bool is_signed, std::string name, const
 }
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
 {
-    AForm::operator=(other);
+    if (this != &other)
+    {
+        AForm::operator=(other);
+        _target = other._target;
+    }
     return *this;
 }
 RobotomyRequestForm::~RobotomyRequestForm()
 {
 }
 
-class RobotomyRequestForm::check_exec : public std::exception
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
+    : AForm(other), _target(other._target)
 {
-    public:
-        virtual const char *what() const throw();
-};
+}
 
 const char *RobotomyRequestForm::check_exec::what() const throw()
 {

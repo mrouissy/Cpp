@@ -6,15 +6,15 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 21:57:11 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/03/30 14:13:10 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:47:13 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form() : _is_signed(false), _name("Default"),  _r_grade(150), _r_execute(0)
-{  
-}
+Form::Form() : _is_signed(false), _name("Default"),  _r_grade(150), _r_execute(0){}
+Form::Form (const Form &other): _is_signed(other._is_signed), _name(other._name), _r_grade(other._r_grade), _r_execute(other._r_execute){}
+Form::~Form(){}
 
 Form::Form(bool is_signed, const std::string name, const int r_grade, const int r_execute) : _is_signed(is_signed), _name(name),  _r_grade(r_grade), _r_execute(r_execute)
 {
@@ -28,11 +28,6 @@ Form &Form::operator=(const Form &other)
     return *this;
 }
  
-Form::~Form()
-{
-    
-}
-
 void Form::checkGrade(int grade) const
 {
     if (grade < 1)
@@ -40,7 +35,6 @@ void Form::checkGrade(int grade) const
     if (grade > 150)
         throw GradeTooLowException();
 }
-
 
 bool Form::get_state() const
 {
@@ -65,8 +59,6 @@ void Form::beSigned(Bureaucrat bureaucrat)
         throw GradeTooLowException();
     _is_signed = true;
 }
-
-
 
 const char *Form::GradeTooHighException::what() const throw()
 {
