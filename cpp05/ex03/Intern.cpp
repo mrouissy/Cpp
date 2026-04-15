@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 14:10:39 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/13 15:49:34 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/15 13:13:59 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ Intern &Intern::operator=(const Intern &other)
     (void)other;
     return *this;
 }
-Intern::~Intern()
-{
- 
-}
+Intern::~Intern(){}
 
 const char *Intern::FormNotFound::what() const throw()
 {

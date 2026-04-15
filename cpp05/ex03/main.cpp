@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 13:38:47 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/10 21:18:21 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/15 13:29:03 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int main()
     try
     {
         Intern st;
-        st.makeFrom("shrubbery", "home");
+        AForm* a = st.makeFrom("shrubbery", "home");
+        delete a;
+        (void)a;
     }
     catch (std::exception &e)
     {
