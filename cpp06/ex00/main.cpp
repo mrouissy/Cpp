@@ -5,22 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 13:32:54 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/21 12:58:56 by mrouissy         ###   ########.fr       */
+/*   Created: 2026/04/21 13:07:33 by mrouissy          #+#    #+#             */
+/*   Updated: 2026/04/21 13:10:56 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-using namespace std;
-int main()
+#include "ScalarConverte.hpp"
+
+int main(int ac, char **av)
 {
-
-    char *rest;
-    string data = "";
-
-
-    cout << -1  << strtol(data.c_str(),&rest,10) << endl;
-    cout << "rest = " << rest << endl;
-    
+    (void)ac;
+    ScalarConverte::convert(av[1]);
     return 0;
 }
