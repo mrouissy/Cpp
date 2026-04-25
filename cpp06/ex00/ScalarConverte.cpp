@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:33:27 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/23 14:39:54 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/25 14:33:15 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,6 @@ ScalarConverte::~ScalarConverte()
 }
 
 
-// void print_data(char c, int i, float f, double d)
-// {
-//     if(c == -1 )
-//     {
-//         std::cout << "unvalid data." << std::endl;
-//         return ;
-//     }
-//     std::cout << "char : "   << c << std::endl;
-//     std::cout << "int : "    << i << std::endl;
-//     std::cout << "float : "  << f << std::endl;
-//     std::cout << "double : " << d << std::endl;
-// }
-// int check_type(std::string data)
-// {
-//     if(data.length() == 1 && !isdigit(0))
-//         return T_CHAR;
-//     else if(data.find('.'))
-//     {
-//         if(data[data.size() - 1] == 'f')
-//             return T_FLOAT;
-//         else
-//             return T_DOUBLE;
-//     }
-//     return T_INT;
-// } 
-
-void char_convert(std::string data)
-{
-    const char *tmp = data.c_str();
-    if(tmp[0] < 33)
-    {
-        std::cout << "Non-printable characters." << std::endl;
-        return;
-    }
-    std::cout << "char : " << static_cast<char>(tmp[0])<< std::endl;;
-}
-
 bool check_imposible(std::string data)
 {
     if(data.empty())
@@ -79,56 +42,79 @@ bool check_imposible(std::string data)
         std::cout << "string is empty." << std::endl;
         return true;
     }
-    else if(data[0]<0 || data[0] > 127 || data[0] == '\0')
+    else if(data.size() == 1 && (data[0] < 0 || data[0] > 127 || data[0] == '\0' ))
     {
         std::cout << "imposible" << std::endl;
         return true;
     }
     return false;
 }
-void int_convert(std::string data)
-{
-    char *rest;
-    int to_cast = strtod(data.c_str(), &rest);
 
-    if(rest && rest != "f")
+bool is_all_digit(const std::string& str) {
+    for (size_t i = 0; i < str.size(); ++i) {
+        if (!::isdigit(str[i])) return false;
+    }
+    return true;
+}
+
+int check_type(std::string data)
+{
+    size_t dot = data.find('.');
+    if(data.size() == 1)
+        return T_CHAR;
+    else if(is_all_digit(data))
+        return T_INT;
+    else if(dot != std::string::npos)
     {
-        std::cout << "can't  convert. " << std::endl;
+        if(data[dot + 1] == 'f' && data[dot + 2] == '\0' )
+            return T_FLOAT;
+        else
+            return T_DOUBLE;
+    }
+    return ERROR;
+}
+
+void print_data(char c, int i, double d, float f)
+{
+    if(c < 32)
+        std::cout << "Char  : Non printabal char " << std::endl;
+    else
+        std::cout << "Char  :  "  << c << std::endl;
+        
+    std::cout << "Int   :  "  << i << std::endl;
+    std::cout << "Double:  "  << d << std::endl;
+    std::cout << "Float :  "  << f << "f" << std::endl;
+
+}
+void char_type(std::string data)
+{
+    
+    if(!isdigit(data[0]))
+    {
+        print_data(data[0], static_cast<int>(data[0]), static_cast<double>(data[0]), static_cast<float>(data[0]));
         return ;
     }
-    std::cout << "int :" << static_cast<int>(to_cast) << std::endl;
+        
 }
-void float_convert(std::string data)
-{
-    char *rest;
-    int to_cast = strtod(data.c_str(), &rest);
-    if(data.find('.'))
-    {
-        if(rest != "f")
-        {
-            std::cout << "imposible" << std::endl; 
-            return;
-        }
-        std::cout << "float: " << static_cast<float>(to_cast) << "f" << std::endl; 
-    }
-    else if(!rest)
-    {
-        std::cout << "float: " << static_cast<float>(to_cast) << ".f" << std::endl; 
-        return;
-    }
-    else if(rest == "nanf" || "nan")
-    {
-        std::cout << "float: nanf" << std::endl; 
-    }
-    else
-        std::cout << "imposible " << std::endl;
-}
+
 void ScalarConverte::convert(std::string data)
 {
-   
     if(check_imposible(data))
         return ;
-    char_convert(data);
+    switch (check_type(data))
+    {
+    case T_CHAR:
+        char_type(data);
+        break;
+    case T_INT:
+        break;
+    case T_FLOAT:
+        break;
+    case T_DOUBLE:
+        break;
+    default:
+        break;
+    }
     
 }
         
