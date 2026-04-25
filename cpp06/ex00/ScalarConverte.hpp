@@ -14,6 +14,7 @@
 #define SCALARCONVERTE
 
 #include <iostream>
+#include <iomanip>
 #include <algorithm>
 #define T_INT    0
 #define T_CHAR   1

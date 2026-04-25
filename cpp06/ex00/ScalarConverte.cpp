@@ -42,9 +42,9 @@ bool check_imposible(std::string data)
         std::cout << "string is empty." << std::endl;
         return true;
     }
-    else if(data.size() == 1 && (data[0] < 0 || data[0] > 127 || data[0] == '\0' ))
+    else if(data.size() == 1 &&  data[0] == '\0' )
     {
-        std::cout << "imposible" << std::endl;
+        std::cout << "imposible to convert it"  << std::endl;
         return true;
     }
     return false;
@@ -60,10 +60,10 @@ bool is_all_digit(const std::string& str) {
 int check_type(std::string data)
 {
     size_t dot = data.find('.');
-    if(data.size() == 1)
-        return T_CHAR;
-    else if(is_all_digit(data))
+    if(is_all_digit(data))
         return T_INT;
+    else if(data.size() == 1)
+        return T_CHAR;
     else if(dot != std::string::npos)
     {
         if(data[dot + 1] == 'f' && data[dot + 2] == '\0' )
@@ -74,27 +74,73 @@ int check_type(std::string data)
     return ERROR;
 }
 
-void print_data(char c, int i, double d, float f)
+static void print_char(char c)
 {
-    if(c < 32)
-        std::cout << "Char  : Non printabal char " << std::endl;
+    std::cout << "Char: ";
+    if (c < 33)
+        std::cout << "Non displayable\n";
     else
-        std::cout << "Char  :  "  << c << std::endl;
-        
-    std::cout << "Int   :  "  << i << std::endl;
-    std::cout << "Double:  "  << d << std::endl;
-    std::cout << "Float :  "  << f << "f" << std::endl;
+        std::cout << "'" << c << "'\n";
+
+    std::cout << "int: " << static_cast<int>(c) << "\n";
+
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "float: " << static_cast<float>(c) << "f\n";
+    std::cout << "double: " << static_cast<double>(c)<< std::endl;
+}
+
+void print_int(std::string data)
+{
+    int i = std::stoi(data);
+
+    std::cout << "Char: ";
+    if(i > 127 || i < 0)
+        std::cout << "imposible to convert it"  << std::endl;
+    else if(i < 33)
+        std::cout << "Non displayable\n";
+    else
+        std::cout << "'" << static_cast<char>(i) << "'\n";
+
+    std::cout << "Int: " << static_cast<int>(i)<< "\n";
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "float: " << static_cast<float>(i)  << "f\n";
+    std::cout << "double: " << static_cast<double>(i)  << std::endl;
+}
+
+void print_double(std::string data)
+{
+    double d = std::stof(data);
+    int i = static_cast<int>(d);
+    if(i > 127 || i < 0)
+        std::cout << "imposible to convert it"  << std::endl;
+    else if(i < 33)
+        std::cout << "Non displayable\n";
+    else
+        std::cout << "'" << static_cast<char>(i) << "'\n";
+
+    std::cout << "Int: " << i << "\n";
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "float: " << static_cast<float>(d)  << "f\n";
+    std::cout << "double: " << d << std::endl;
 
 }
-void char_type(std::string data)
+
+void print_float(std::string data)
 {
-    
-    if(!isdigit(data[0]))
-    {
-        print_data(data[0], static_cast<int>(data[0]), static_cast<double>(data[0]), static_cast<float>(data[0]));
-        return ;
-    }
-        
+    double d = std::stof(data);
+    int i = static_cast<int>(d);
+    if(i > 127 || i < 0)
+        std::cout << "imposible to convert it"  << std::endl;
+    else if(i < 33)
+        std::cout << "Non displayable\n";
+    else
+        std::cout << "'" << static_cast<char>(i) << "'\n";
+
+    std::cout << "Int: " << i << "\n";
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "float: " << static_cast<float>(d)  << "f\n";
+    std::cout << "double: " << d << std::endl;
+
 }
 
 void ScalarConverte::convert(std::string data)
@@ -103,18 +149,28 @@ void ScalarConverte::convert(std::string data)
         return ;
     switch (check_type(data))
     {
-    case T_CHAR:
-        char_type(data);
-        break;
-    case T_INT:
-        break;
-    case T_FLOAT:
-        break;
-    case T_DOUBLE:
-        break;
-    default:
-        break;
+
+        case T_INT:
+        {
+            print_int(data);
+            break;
+        }
+        case T_CHAR:
+        {
+            print_char(data[0]);
+            break;
+        }
+        case T_FLOAT:
+            break;
+        case T_DOUBLE:
+        {
+            print_double(data);
+            break;
+        }
+        default:
+         break;
     }
     
 }
-        
+
+
