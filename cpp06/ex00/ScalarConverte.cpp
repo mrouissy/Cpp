@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:33:27 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/25 14:33:15 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/27 09:17:55 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,15 @@ bool check_imposible(std::string data)
 }
 
 bool is_all_digit(const std::string& str) {
-    for (size_t i = 0; i < str.size(); ++i) {
-        if (!::isdigit(str[i])) return false;
+    if (str.empty()) return false;
+    size_t start = 0;
+    if (str[0] == '+' || str[0] == '-') {
+        if (str.size() == 1) return false;
+        start = 1;
+    }
+    for (size_t i = start; i < str.size(); ++i) {
+        if (!::isdigit(str[i])) 
+            return false;
     }
     return true;
 }
@@ -60,7 +67,7 @@ int check_type(std::string data)
     return ERROR;
 }
 
-static void print_all(double value)
+void print_all(double value)
 {
     // Print char
     std::cout << "Char: ";
@@ -102,7 +109,7 @@ static void print_all(double value)
         std::cout << "double: " << value << std::endl;
 }
 
-static void print_char(char c)
+void print_char(char c)
 {
     std::cout << "Char: ";
     if (c < 33)
@@ -123,16 +130,16 @@ void ScalarConverte::convert(std::string data)
     switch (check_type(data))
     {
         case T_INT:
-            print_all(static_cast<double>(std::stoi(data)));
+            print_all(static_cast<double>(std::atoi(data.c_str())));
             break;
         case T_CHAR:
             print_char(data[0]);
             break;
         case T_FLOAT:
-            print_all(std::stof(data));
+            print_all(std::strtod(data.c_str(), NULL));
             break;
         case T_DOUBLE:
-            print_all(std::stof(data));
+            print_all(std::strtod(data.c_str(), NULL));
             break;
         default:
             break;

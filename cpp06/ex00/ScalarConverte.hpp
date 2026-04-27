@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:33:27 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/25 14:16:59 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/27 08:46:10 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 
 #include <iostream>
 #include <iomanip>
-#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <limits>
+#include <string.h>
+
+
 #define T_INT    0
 #define T_CHAR   1
 #define T_FLOAT  2
