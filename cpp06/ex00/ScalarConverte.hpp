@@ -6,7 +6,7 @@
 /*   By: mrouissy <mrouissy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 13:33:27 by mrouissy          #+#    #+#             */
-/*   Updated: 2026/04/27 08:46:10 by mrouissy         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:32:23 by mrouissy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <cstdlib>
-#include <limits>
-#include <string.h>
+#include <cctype>
+#include <climits>
+#include <cmath>
 
 
 #define T_INT    0
