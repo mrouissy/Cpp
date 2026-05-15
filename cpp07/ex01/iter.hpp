@@ -1,4 +1,3 @@
-
 #ifndef ITER_HPP
 #define ITER_HPP
 
@@ -9,6 +8,19 @@ void iter(T* array, size_t len, F func)
 {
     for (size_t i = 0; i < len; i++)
         func(array[i]);
+}
+
+template <typename T, typename F>
+void iter(const T* array, size_t len, F func)
+{
+    for (size_t i = 0; i < len; i++)
+        func(array[i]);
+}
+
+template <typename T>
+void print_elem(const T &elem)
+{
+    std::cout << elem << " ";
 }
 
 #endif

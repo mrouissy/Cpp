@@ -19,7 +19,7 @@ mi min(mi param1, mi param2)
 template <typename ma>
 ma max(ma param1, ma param2)
 {
-return (param1 > param2) ? param1 : param2;
+	return (param1 > param2) ? param1 : param2;
 }
 
 #endif
