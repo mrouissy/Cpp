@@ -1,48 +1,57 @@
 #include "Span.hpp"
 
-Span::Span(unsigned int N)
+Span::Span(unsigned int n) : N(n)
 {
-    this->sp.reserve(N);
+    sp.reserve(n);
 }
 
-Span::~Span(){std::cout << "destractor called" << std::endl;}
+Span::~Span() {}
 
-Span Span::operator=(const Span& other)
+Span& Span::operator=(const Span& other)
 {
-    if(this != &other)
+    if (this != &other)
     {
-        this->sp.reserve(other.sp.capacity());
+        this->N = other.N;
         this->sp = other.sp;
     }
-
     return *this;
 }
 
 Span::Span(const Span& other)
 {
-    if(this != &other)
-        *this = other;
+    *this = other;
 }
 
 void Span::addNumber(int num)
 {
-    if(this->sp.capacity() == this->sp.size())
+    if (sp.size() >= N)
         throw std::runtime_error("the Span is full");
-    this->sp.push_back(num);
+    sp.push_back(num);
 }
 
-std::vector<int>::iterator Span::longestSpan()
-{
-    if(this->sp.size() <= 1)
-        throw std::runtime_error("the span must be contain atless 2 number");
 
-    return std::max_element(this->sp.begin(), this->sp.end()); 
+
+int Span::longestSpan() const
+{
+    if (sp.size() <= 1)
+        throw std::runtime_error("the span must contain at least 2 numbers");
+    std::vector<int>::const_iterator it_min = std::min_element(sp.begin(), sp.end());
+    std::vector<int>::const_iterator it_max = std::max_element(sp.begin(), sp.end());
+    return *it_max - *it_min;
 }
 
-std::vector<int>::iterator Span::shortestSpan()
+int Span::shortestSpan() const
 {
-    if(this->sp.size() <= 1)
-        throw std::runtime_error("the span must be contain atless 2 number");
-
-    return std::min_element(this->sp.begin(), this->sp.end()); 
+    if (sp.size() <= 1)
+        throw std::runtime_error("the span must contain at least 2 numbers");
+    std::vector<int> tmp = sp;
+    std::sort(tmp.begin(), tmp.end());
+    int min_diff = std::numeric_limits<int>::max();
+    for (size_t i = 1; i < tmp.size(); ++i)
+    {
+        int diff = tmp[i] - tmp[i - 1];
+        if (diff < min_diff)
+            min_diff = diff;
+    }
+    return min_diff;
 }

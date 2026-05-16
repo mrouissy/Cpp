@@ -1,31 +1,29 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
-#include <iostream>
 #include <vector>
-#include <ctime>
-#include <cstdlib>
 #include <algorithm>
-#include <iterator>
+#include <stdexcept>
+#include <limits>
+#include <iostream>
+#include <ctime>
 
 class Span
 {
 private:
-    Span(); /// def constractor
+    Span();
+    unsigned int N;
     std::vector<int> sp;
 public:
-    Span(unsigned int N); // p constractor
-    Span(const Span& other); // copy constractor
-    Span operator=(const Span& other); // operator overloading
-    
-    void addNumber(int num);
-   
-    std::vector<int>::iterator shortestSpan();
-    std::vector<int>::iterator longestSpan();
-
-
-
+    Span(unsigned int N);
+    Span(const Span& other);
+    Span& operator=(const Span& other);
     ~Span();
+
+    void addNumber(int num);
+
+    int shortestSpan() const;
+    int longestSpan() const;
 };
 
 #endif

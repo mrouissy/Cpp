@@ -19,8 +19,8 @@ int main(int , char**)
 
     add_range(&span, 10000);
 
-    std::cout << *(span.longestSpan()) << std::endl;
-    std::cout << *(span.shortestSpan()) << std::endl;
+    std::cout << span.longestSpan() << std::endl;
+    std::cout << span.shortestSpan() << std::endl;
 
     
     return 0;
